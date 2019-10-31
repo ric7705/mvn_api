@@ -1,4 +1,4 @@
-package api;
+package com.ceiere.mvn_api;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
