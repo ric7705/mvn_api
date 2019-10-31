@@ -1,0 +1,196 @@
+swagger: "2.0"
+info:
+  description: "sample"
+  version: "1.0.0"
+  title: "Swagger Test"
+  termsOfService: "http://swagger.io/terms/"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+basePath: "/api"
+tags:
+  - name: "user"
+    description: "user info"
+  - name: "invoice"
+    description: "invoice info"
+schemes:
+  - "https"
+  - "http"
+paths:
+  /user:
+    post:
+      tags:
+        - "user"
+      summary: "Create user"
+      description: "create user"
+      operationId: "createUser"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Created user object"
+          required: true
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: Success
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+    get:
+      tags:
+        - "user"
+      description: "get all user"
+      operationId: "userList"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/UserList"
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+
+  /invoice:
+    post:
+      tags:
+        - "user"
+      summary: "Create invoice"
+      description: "create invoice"
+      operationId: "createInvoice"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Created invoice object"
+          required: true
+          schema:
+            $ref: "#/definitions/Invoice"
+      responses:
+        "200":
+          description: Success
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+    get:
+      tags:
+        - "user"
+      description: "get all invoice"
+      operationId: "invoiceList"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/InvoiceList"
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+
+securityDefinitions:
+  petstore_auth:
+    type: "oauth2"
+    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      write:pets: "modify pets in your account"
+      read:pets: "read your pets"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+
+definitions:
+  Invoice:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      quantity:
+        type: "integer"
+        format: "int32"
+      shipDate:
+        type: "string"
+        format: "date-time"
+      status:
+        type: "string"
+        description: "Order Status"
+        enum:
+          - "Draft"
+          - "Sent"
+          - "Viewed"
+          - "Partial"
+          - "Paid"
+          - "Overdue"
+          - "Canceled"
+
+
+  InvoiceList:
+    properties:
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/Invoice'
+
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      username:
+        type: "string"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+      phone:
+        type: "string"
+
+  UserQuery:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      username:
+        type: "string"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      email:
+        type: "string"
+
+  UserList:
+    properties:
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/UserQuery'
+
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
