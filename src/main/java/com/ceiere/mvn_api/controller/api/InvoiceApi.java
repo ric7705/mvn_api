@@ -3,7 +3,7 @@
  * https://github.com/swagger-api/swagger-codegen
  * Do not edit the class manually.
  */
-package com.ceiere.mvn_api.controller;
+package com.ceiere.mvn_api.controller.api;
 
 import com.ceiere.mvn_api.model.Invoice;
 import com.ceiere.mvn_api.model.InvoiceList;

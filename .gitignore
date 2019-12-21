@@ -1,4 +1,4 @@
 .idea
 target/
 test.iml
-swagger/jar/*
+swagger/swagger-codegen-cli-2.3.0.jar
